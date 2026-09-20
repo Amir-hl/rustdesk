@@ -135,6 +135,13 @@ jobs:
               build-args: "",
             }
     steps:
+
+      - name: Overwrite Server Config
+        shell: bash
+        run: |
+          sed -i 's/pub const RENDEZVOUS_SERVERS.*/pub const RENDEZVOUS_SERVERS: \&[\&str] = \&["192.168.45.161"];/' libs/hbb_common/src/config.rs
+          sed -i 's/pub const RS_PUB_KEY.*/pub const RS_PUB_KEY: \&str = "+xK8pmJZ4XRBggbgnQaWA9w7dvHHPhUkYLgx9MXSZuw=";/' libs/hbb_common/src/config.rs
+
       - name: Export GitHub Actions cache environment variables
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6
         with:
